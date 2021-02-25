@@ -1,3 +1,4 @@
+#imports
 import speech_recognition as sr
 import pyttsx3
 import pywhatkit
@@ -11,10 +12,11 @@ listener = sr.Recognizer()
 engine = pyttsx3.init()
 voices = engine.getProperty('voices')
 
+#setting up the voice rate and the type
 engine.setProperty('rate', 130)
 engine.setProperty('voice', voices[1].id)
 
-
+#function that let the engine talk
 def talk(text):
     engine.say(text)
     engine.runAndWait()
