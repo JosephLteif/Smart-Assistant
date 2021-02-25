@@ -99,3 +99,4 @@ os.remove('CaptureImage.jpg')
 
 def funct():
     print("Hello")
+
