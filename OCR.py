@@ -4,6 +4,8 @@ import pytesseract
 import time
 import numpy as np
 import os
+import imutils
+from autocorrect import Speller
 
 video = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 
@@ -16,7 +18,6 @@ while True:
         check, frame = video.read()
         a = cv2.imwrite("CaptureImage.jpg", frame)
         break
-
 
 video.release()
 
@@ -57,6 +58,7 @@ contours, hierarchy = cv2.findContours(dilation, cv2.RETR_EXTERNAL,
 # Creating a copy of image
 im2 = img.copy()
 
+
 # A text file is created and flushed
 file = open("recognized.txt", "w+")
 file.write("")
@@ -78,8 +80,23 @@ for cnt in contours:
     # Cropping the text block for giving input to OCR
     cropped = im2[y:y + h, x:x + w]
 
+    #image data
+    data = pytesseract.image_to_osd(cropped).split()
+    
+    # Detect language
+    language = data[-4]
+
+    # Detect angle
+    rotation = data[-9]
+    print(data)
+
+    #apply rotation
+    cropped = imutils.rotate(cropped, angle=-int(rotation))
+
     # Apply OCR on the cropped image
+    # if language == 'arabic':
     text = pytesseract.image_to_string(cropped)
+    # elif language == 'latin':
 
     # Formatting the text
 
@@ -88,8 +105,10 @@ for cnt in contours:
     # file.write(text)
     # file.write("\n")
 
+spell = Speller(only_replacements=True)
 result = result.replace("  ", "")
-file.write(result)
+var = spell(result)
+file.write(var)
 
 
 # Close the file
@@ -99,4 +118,3 @@ os.remove('CaptureImage.jpg')
 
 def funct():
     print("Hello")
-
