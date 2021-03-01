@@ -3,7 +3,7 @@ import requests
 def weather(location):
     
     #my api key from the openweathermap website
-    user_api = "d3464032549dabf633b7079b680cce53"
+    user_api = ""
 
     #accessing the json file with this link of a specific location
     complete_api_link = "https://api.openweathermap.org/data/2.5/weather?q="+location+"&appid="+user_api
