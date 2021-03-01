@@ -1,4 +1,5 @@
 import requests
+from datetime import date
 
 def weather(location):
     
@@ -25,5 +26,14 @@ def weather(location):
         "humidity" : hmdt,
         "wind speed": wind_spd
     }
+
+    print ("-------------------------------------------------------------")
+    print ("Weather Stats for - {}  || {}".format(location.upper(), date.today().strftime("%b-%d-%Y")))
+    print ("-------------------------------------------------------------")
+
+    print ("Current temperature is: {:.2f} deg C".format(temp_city))
+    print ("Current weather desc  :",weather_desc)
+    print ("Current Humidity      :",hmdt, '%')
+    print ("Current wind speed    :",wind_spd ,'kmph')
     
     return location_info

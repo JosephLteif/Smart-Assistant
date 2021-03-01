@@ -27,6 +27,7 @@ def take_command():
     try:
         with sr.Microphone() as source:
             print('Listening...')
+            talk("Listening...")
             voice = listener.listen(source)
             command = listener.recognize_google(voice)
             command = command.lower()
@@ -37,6 +38,19 @@ def take_command():
     except:
         pass
     return command
+
+def Boot_Assistant():
+    try:
+        with sr.Microphone() as source:
+            voice = listener.listen(source)
+            command = listener.recognize_google(voice)
+            command = command.lower()
+            if 'hello alexa' in command:
+                talk("Hello {}".format(os.getlogin()))
+                run_alexa()
+
+    except:
+        pass
 
 
 def run_alexa():
@@ -92,7 +106,9 @@ def run_alexa():
 
     else:
         talk("Could you please repeat ? I didn't understand")
+    
+    run_alexa()
 
 
 while True:
-    run_alexa()
+    Boot_Assistant()

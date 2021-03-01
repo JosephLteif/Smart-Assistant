@@ -7,30 +7,32 @@ import os
 import imutils
 from autocorrect import Speller
 
-video = cv2.VideoCapture(0, cv2.CAP_DSHOW)
+# video = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 
-while True:
-    # check returns true if python can actually read and frame is ndim numpy array
-    check, frame = video.read()
-    cv2.imshow('Capturing...', frame)
-    key = cv2.waitKey(1)
-    if key == ord('q'):
-        check, frame = video.read()
-        a = cv2.imwrite("CaptureImage.jpg", frame)
-        break
+# while True:
+#     # check returns true if python can actually read and frame is ndim numpy array
+#     check, frame = video.read()
+#     cv2.imshow('Capturing...', frame)
+#     key = cv2.waitKey(1)
+#     if key == ord('q'):
+#         check, frame = video.read()
+#         a = cv2.imwrite("CaptureImage.jpg", frame)
+#         break
 
-video.release()
+# video.release()
 
-cv2.destroyAllWindows()
+# cv2.destroyAllWindows()
 
 # Mention the installed location of Tesseract-OCR in your system
 pytesseract.pytesseract.tesseract_cmd = 'C:\\Program Files (x86)\\Tesseract-OCR\\tesseract.exe'
 
+from border_crop import border_crop
+
 # Read image from which text needs to be extracted
-img = cv2.imread("CaptureImage.jpg")
+img = border_crop("IMG_20210228_121526.jpg")
 
 # Preprocessing the image starts
-img = cv2.resize(img, None, fx=2, fy=2, interpolation=cv2.INTER_CUBIC)
+# img = cv2.resize(img, None, fx=2, fy=2, interpolation=cv2.INTER_CUBIC)
 
 # img = cv2.GaussianBlur(img, (5, 5), 0)
 img = cv2.medianBlur(img, 5)
@@ -85,10 +87,11 @@ for cnt in contours:
     
     # Detect language
     language = data[-4]
-
+    print(language)
     # Detect angle
     rotation = data[-9]
     print(data)
+    print(rotation)
 
     #apply rotation
     cropped = imutils.rotate(cropped, angle=-int(rotation))
@@ -105,10 +108,10 @@ for cnt in contours:
     # file.write(text)
     # file.write("\n")
 
-spell = Speller(only_replacements=True)
-result = result.replace("  ", "")
-var = spell(result)
-file.write(var)
+    spell = Speller(only_replacements=True)
+    result = result.replace("  ", "")
+    var = spell(result)
+    file.write(var)
 
 
 # Close the file
