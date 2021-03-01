@@ -4,10 +4,7 @@ from datetime import date
 def weather(location):
     
     #my api key from the openweathermap website
-<<<<<<< HEAD
     #d3464032549dabf633b7079b680cce53
-=======
->>>>>>> 3277107120370aa7cc4082425f0bf9da14f17f4a
     user_api = ""
 
     #accessing the json file with this link of a specific location
