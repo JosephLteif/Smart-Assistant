@@ -7,6 +7,7 @@ import wikipedia
 import pyjokes
 import sys
 import os
+from weather import weather
 
 listener = sr.Recognizer()
 engine = pyttsx3.init()
@@ -83,6 +84,11 @@ def run_alexa():
         talk("Sure thing!")
         from FaceDetection import funct
         funct()
+    
+    elif 'weather of' in command:
+        location = command.replace('weather of','')
+        info_dict = weather(location)
+        talk("it's " + info_dict["weather description"] + "today with a temperature of " + str(info_dict["temperature"]) )
 
     else:
         talk("Could you please repeat ? I didn't understand")
