@@ -15,6 +15,7 @@ def funct():
         # check returns true if python can actually read and frame is ndim numpy array
         check, frame = video.read()
         cv2.imwrite("VideoCapture.jpg", frame)
+        
         image = cv2.imread("VideoCapture.jpg")
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
@@ -29,12 +30,15 @@ def funct():
             for (ex, ey, ew, eh) in eyes:
                 cv2.rectangle(roi_color, (ex, ey), (ex+ew, ey+eh), (0, 255, 0), 2)
         if len(faces) == 0:
-            cv2.imshow('img', frame)
+
+            cv2.imshow('img', np.fliplr(frame))
             Key = cv2.waitKey(1)
         else:
-            cv2.imshow('img', img)
+            cv2.imshow('img', np.fliplr(img))
             Key = cv2.waitKey(1)
         if Key == ord('q'):
             break
 
     os.remove('VideoCapture.jpg')
+
+funct()
