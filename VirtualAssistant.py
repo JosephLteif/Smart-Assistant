@@ -91,8 +91,8 @@ def run_alexa():
 
     elif 'ocr' in command:
         talk("Sure thing!")
-        from OCR import funct
-        funct()
+        import OCR
+        # funct()
 
     elif 'face detection' in command:
         talk("Sure thing!")
