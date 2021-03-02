@@ -8,6 +8,7 @@ import pyjokes
 import sys
 import os
 from weather import weather
+import psutil
 
 listener = sr.Recognizer()
 engine = pyttsx3.init()
@@ -103,6 +104,12 @@ def run_alexa():
         location = command.replace('weather of','')
         info_dict = weather(location)
         talk("it's " + info_dict["weather description"] + "today with a temperature of " + str(info_dict["temperature"]) )
+
+    elif 'battery level' in command:
+        battery = psutil.sensors_battery()
+        talk("Current Battery percentage is {}%".format(battery.percent)) 
+        if battery.power_plugged:
+            talk("And is currently charging.")
 
     else:
         talk("Could you please repeat ? I didn't understand")
