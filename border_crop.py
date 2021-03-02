@@ -26,12 +26,4 @@ def border_crop(border_path):
     # Obtain birds' eye view of image
     warped = four_point_transform(image, displayCnt.reshape(4, 2))
 
-    # cv2.imshow("thresh", thresh)
-    cv2.imshow("warped", warped)
-    # cv2.imshow("image", image)
-    # cv2.imwrite("assets\\thresh.png", thresh)
-    cv2.imwrite("CaptureImageCropped.jpg", warped)
-    # cv2.imwrite("assets\\image.png", image)
-    cv2.waitKey()
-
     return warped
