@@ -105,12 +105,14 @@ def run_alexa():
         info_dict = weather(location)
         talk("it's " + info_dict["weather description"] + "today with a temperature of " + str(info_dict["temperature"]) )
 
-    elif 'battery level' in command:
+    elif 'computer stat' in command:
         battery = psutil.sensors_battery()
         talk("Current Battery percentage is {}%".format(battery.percent)) 
         if battery.power_plugged:
             talk("And is currently charging.")
-
+        talk("the cpu is at {}%".format(psutil.cpu_percent()))
+        talk('RAM memory is at {} %'.format(psutil.virtual_memory()[2]))
+        
     else:
         talk("Could you please repeat ? I didn't understand")
     
