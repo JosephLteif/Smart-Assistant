@@ -29,7 +29,8 @@ def take_command():
         with sr.Microphone() as source:
             print('Listening...')
             talk("Listening...")
-            voice = listener.listen(source)
+            listener.adjust_for_ambient_noise(source,duration=0.5)
+            voice = listener.listen(source, timeout=3, phrase_time_limit=5)
             command = listener.recognize_google(voice)
             command = command.lower()
             if 'alexa' in command:
@@ -43,7 +44,8 @@ def take_command():
 def Boot_Assistant():
     try:
         with sr.Microphone() as source:
-            voice = listener.listen(source)
+            listener.adjust_for_ambient_noise(source,duration=0.5)
+            voice = listener.listen(source, timeout=3, phrase_time_limit=5)
             command = listener.recognize_google(voice)
             command = command.lower()
             print(command)
@@ -94,19 +96,17 @@ def run_alexa():
     elif 'ocr' in command:
         talk("Sure thing!")
         import OCR
-        # funct()
 
     elif 'face detection' in command:
         talk("Sure thing!")
-        from FaceDetection import funct
-        funct()
+        import FaceDetection
     
     elif 'weather of' in command:
         location = command.replace('weather of','')
         info_dict = weather(location)
         talk("it's " + info_dict["weather description"] + "today with a temperature of " + str(info_dict["temperature"]) )
 
-    elif 'computer stat' in command:
+    elif 'monitor' and 'computer' in command:
         battery = psutil.sensors_battery()
         talk("Current Battery percentage is {}%".format(battery.percent)) 
         if battery.power_plugged:
