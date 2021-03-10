@@ -62,7 +62,7 @@ def PreprocessingImage(img, rotation, language):
     cv2.imshow("img", img)
     cv2.waitKey(0)
     #apply rotation
-    rotated = imutils.rotate(img, angle=-int(rotation))
+    rotated = imutils.rotate(img, angle=-int(0))
     cv2.imshow("img", rotated)
     cv2.waitKey(0)
     # Resize the image to a given scale

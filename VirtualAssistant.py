@@ -46,6 +46,7 @@ def Boot_Assistant():
             voice = listener.listen(source)
             command = listener.recognize_google(voice)
             command = command.lower()
+            print(command)
             if 'hello alexa' in command:
                 talk("Hello {}".format(os.getlogin()))
                 run_alexa()
