@@ -24,22 +24,30 @@ def funct():
 
         faces = face_cascade.detectMultiScale(gray, 1.3, 5)
 
-
         for (x, y, w, h) in faces:
+            State = 'Unknown - Neutral'
             image = cv2.rectangle(image, (x, y), (x+w, y+h), (255, 0, 0), 2)
             roi_gray = gray[y:y+h, x:x+w]
             roi_color = image[y:y+h, x:x+w]
-            cv2.putText(image,'Unknown',(x,y+h+20), font, 0.5, (255,0,0)) #---write the text
-            smiles = smile_cascade.detectMultiScale(roi_gray, 1.3, 45)
+            smiles = smile_cascade.detectMultiScale(roi_gray, 1.3, 43)
             for (ex, ey, ew, eh) in smiles:
                cv2.rectangle(roi_color, (ex, ey), (ex+ew, ey+eh), (0, 255, 0), 2)
+            if len(smiles):
+                State = 'Unknown - Happy'
+            cv2.putText(image,State,(x,y+h+20), font, 0.5, (255,0,0)) #---write the text
 
         sidefaces = side_face_cascade.detectMultiScale(gray, 1.3, 5)
         for (x, y, w, h) in sidefaces:
+            State = 'Unknown - Neutral'
             image = cv2.rectangle(image, (x, y), (x+w, y+h), (255, 0, 0), 2)
             roi_gray = gray[y:y+h, x:x+w]
             roi_color = image[y:y+h, x:x+w]
-            cv2.putText(image,'Unknown',(x,y+h+20), font, 0.5, (255,0,0)) #---write the text
+            smiles = smile_cascade.detectMultiScale(roi_gray, 1.3, 43)
+            for (ex, ey, ew, eh) in smiles:
+               cv2.rectangle(roi_color, (ex, ey), (ex+ew, ey+eh), (0, 255, 0), 2)
+            if len(smiles):
+                State = 'Unknown - Happy'
+            cv2.putText(image,State,(x,y+h+20), font, 0.5, (255,0,0)) #---write the text
 
         if len(faces) == 0 and len(sidefaces) == 0:
 
