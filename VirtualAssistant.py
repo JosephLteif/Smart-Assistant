@@ -28,7 +28,6 @@ def take_command():
     try:
         with sr.Microphone() as source:
             print('Listening...')
-            talk("Listening...")
             listener.adjust_for_ambient_noise(source,duration=1)
             voice = listener.listen(source, timeout=3, phrase_time_limit=5)
             command = listener.recognize_google(voice,language="en-US")
@@ -104,7 +103,7 @@ def run_alexa():
     elif 'weather of' in command:
         location = command.replace('weather of','')
         info_dict = weather(location)
-        talk("it's " + info_dict["weather description"] + "today with a temperature of " + str(info_dict["temperature"]) )
+        talk("it's " + info_dict["weather description"] + "today with a temperature of " + str(info_dict["temperature"]))
 
     elif 'statistics' in command:
         battery = psutil.sensors_battery()

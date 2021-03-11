@@ -33,16 +33,19 @@ def TesseractSetup():
 def CropBorder():
     # return cropped image from which text needs to be extracted
     im = Image.open("CaptureImage.jpg")
+    # im = Image.open("./Assets/quote-luck-is-when-skill-meets-opportunity-vinnie-paz-80-71-88.jpg")
+    if im.mode != 'RGB':
+        im = im.convert('RGB')
     im.save("CaptureImage.jpg", dpi=(300,300))
-    return border_crop("CaptureImage.jpg")
-    # return cv2.imread("CaptureImage.jpg")
+    # return border_crop("CaptureImage.jpg")
+    return cv2.imread("CaptureImage.jpg")
 
 def ExtractImageData(img):
-    cv2.imshow("img", img)
-    cv2.waitKey(0)
+    # cv2.imshow("img", img)
+    # cv2.waitKey(0)
     img = cv2.resize(img, None, fx=2, fy=2, interpolation=cv2.INTER_CUBIC)
-    cv2.imshow("img", img)
-    cv2.waitKey(0)
+    # cv2.imshow("img", img)
+    # cv2.waitKey(0)
     #image data
     data = pytesseract.image_to_osd(img).split()
          
@@ -58,29 +61,29 @@ def ExtractImageData(img):
     return language, rotation
 
 
-def PreprocessingImage(img, rotation, language):
-    cv2.imshow("img", img)
-    cv2.waitKey(0)
+def PreprocessingImage(img, rotation):
+    # cv2.imshow("img", img)
+    # cv2.waitKey(0)
     #apply rotation
-    rotated = imutils.rotate(img, angle=-int(0))
-    cv2.imshow("img", rotated)
-    cv2.waitKey(0)
+    rotated = imutils.rotate(img, angle=-(int(rotation)))
+    # cv2.imshow("img", rotated)
+    # cv2.waitKey(0)  
     # Resize the image to a given scale
     img = cv2.resize(rotated, None, fx=2, fy=2, interpolation=cv2.INTER_CUBIC)
-    cv2.imshow("img", img)
-    cv2.waitKey(0)
+    # cv2.imshow("img", img)
+    # cv2.waitKey(0)
     #Blur using GaussianBlur method
     img = cv2.GaussianBlur(img, (5, 5), 0)
-    cv2.imshow("img", img)
-    cv2.waitKey(0)
+    # cv2.imshow("img", img)
+    # cv2.waitKey(0)
     # Convert the image to gray scale
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    cv2.imshow("img", gray)
-    cv2.waitKey(0)
+    # cv2.imshow("img", gray)
+    # cv2.waitKey(0)
     #Apply threshhold
     thresh1 = cv2.threshold(gray, 0, 255, cv2.THRESH_TOZERO)[1]
-    cv2.imshow("img", thresh1)
-    cv2.waitKey(0)
+    # cv2.imshow("img", thresh1)
+    # cv2.waitKey(0)
     # Specify structure shape and kernel size.
     # Kernel size increases or decreases the area
     # of the rectangle to be detected.
@@ -90,8 +93,8 @@ def PreprocessingImage(img, rotation, language):
 
     # Appplying dilation on the threshold image
     dilation = cv2.dilate(thresh1, rect_kernel, iterations=1)
-    cv2.imshow("img", dilation)
-    cv2.waitKey(0)
+    # cv2.imshow("img", dilation)
+    # cv2.waitKey(0)
     # Finding contours
     contours, hierarchy = cv2.findContours(dilation, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 
@@ -106,7 +109,7 @@ def CreateFileToPrintTo():
     file.write("")
     file.close()
 
-def FindContour(im2, contours):
+def FindContour(im2, contours, language):
     # Looping through the identified contours
     # Then rectangular part is cropped and passed on
     # to pytesseract for extracting text from it
@@ -124,9 +127,11 @@ def FindContour(im2, contours):
         cropped = im2[y:y + h, x:x + w]
 
         # Apply OCR on the cropped image
-        # if language == 'arabic':
-        text = pytesseract.image_to_string(cropped)
-        # elif language == 'latin':`
+        if language.lower() == 'latin':
+            print("Hello")
+            text = pytesseract.image_to_string(cropped,lang="eng")
+        else:
+            text = pytesseract.image_to_string(cropped)
 
         # Storing the text
         result += (text + "\n")
@@ -147,9 +152,9 @@ VideoOn()
 TesseractSetup()
 img = CropBorder()
 language, rotation = ExtractImageData(img)
-im2, contours = PreprocessingImage(img, rotation, language)
+im2, contours = PreprocessingImage(img, rotation)
 CreateFileToPrintTo()
-result, file = FindContour(im2, contours)
+result, file = FindContour(im2, contours, language)
 AppendResultToFile(result, file)
 os.remove('CaptureImage.jpg')
 
