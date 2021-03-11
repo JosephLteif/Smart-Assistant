@@ -13,7 +13,7 @@ def weather(location):
     #getting the data 
     api_data = api_link.json()
     
-
+    
     #create variables to store and display data
     temp_city = round(((api_data['main']['temp']) - 273.15),1)
     weather_desc = api_data['weather'][0]['description']
