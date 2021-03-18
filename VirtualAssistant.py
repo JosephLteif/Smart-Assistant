@@ -1,4 +1,4 @@
-#imports
+# imports
 import speech_recognition as sr
 import pyttsx3
 import pywhatkit
@@ -14,11 +14,13 @@ listener = sr.Recognizer()
 engine = pyttsx3.init()
 voices = engine.getProperty('voices')
 
-#setting up the voice rate and the type
+# setting up the voice rate and the type
 engine.setProperty('rate', 130)
 engine.setProperty('voice', voices[1].id)
 
-#function that let the engine talk
+# function that let the engine talk
+
+
 def talk(text):
     engine.say(text)
     engine.runAndWait()
@@ -28,27 +30,28 @@ def take_command():
     try:
         with sr.Microphone() as source:
             print('Listening...')
-            listener.adjust_for_ambient_noise(source,duration=1)
+            listener.adjust_for_ambient_noise(source, duration=1)
             voice = listener.listen(source, timeout=3, phrase_time_limit=5)
-            command = listener.recognize_google(voice,language="en-US")
+            command = listener.recognize_google(voice, language="en-US")
             command = command.lower()
-            if 'alexa' in command:
-                command = command.replace('alexa', '')
+            if 'misty' in command:
+                command = command.replace('misty', '')
                 print(command)
 
     except:
         pass
     return command
 
+
 def Boot_Assistant():
     try:
         with sr.Microphone() as source:
-            listener.adjust_for_ambient_noise(source,duration=1)
+            listener.adjust_for_ambient_noise(source, duration=1)
             voice = listener.listen(source, timeout=3, phrase_time_limit=5)
-            command = listener.recognize_google(voice,language="en-US")
+            command = listener.recognize_google(voice, language="en-US")
             command = command.lower()
             print(command)
-            if 'hello alexa' in command:
+            if 'hello misty' in command:
                 talk("Hello {}".format(os.getlogin()))
                 run_alexa()
 
@@ -99,26 +102,27 @@ def run_alexa():
     elif 'face detection' in command:
         talk("Sure thing!")
         import FaceDetection
-    
+
     elif 'weather of' in command:
-        location = command.replace('weather of','')
+        location = command.replace('weather of', '')
         info_dict = weather(location)
-        talk("it's " + info_dict["weather description"] + "today with a temperature of " + str(info_dict["temperature"]))
+        talk("it's " + info_dict["weather description"] +
+             "today with a temperature of " + str(info_dict["temperature"]))
 
     elif 'statistics' in command:
         battery = psutil.sensors_battery()
         print("Current Battery percentage is {}%".format(battery.percent))
         print("the cpu is at {}%".format(psutil.cpu_percent()))
         print('RAM memory is at {} %'.format(psutil.virtual_memory()[2]))
-        talk("Current Battery percentage is {}%".format(battery.percent)) 
+        talk("Current Battery percentage is {}%".format(battery.percent))
         if battery.power_plugged:
             talk("And is currently charging.")
         talk("the cpu is at {}%".format(psutil.cpu_percent()))
         talk('RAM memory is at {} %'.format(psutil.virtual_memory()[2]))
-        
+
     else:
         talk("Could you please repeat ? I didn't understand")
-    
+
     run_alexa()
 
 
