@@ -10,3 +10,6 @@ VirtualAssistant.py
 __pycache__/border_crop.cpython-38.pyc
 __pycache__/FaceDetection.cpython-38.pyc
 __pycache__/weather.cpython-38.pyc
+test.py
+gatherImages.py
+facecmp.py
