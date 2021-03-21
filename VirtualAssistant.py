@@ -19,8 +19,6 @@ engine.setProperty('rate', 130)
 engine.setProperty('voice', voices[1].id)
 
 # function that let the engine talk
-
-
 def talk(text):
     engine.say(text)
     engine.runAndWait()
