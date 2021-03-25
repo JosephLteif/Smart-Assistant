@@ -14,3 +14,14 @@ test.py
 gatherImages.py
 facecmp.py
 testimage.jpg
+faces/bill gates.jpg
+faces/donald trump.jpg
+faces/FaceImage17.jpg
+faces/elon musk.jpg
+faces/Georgio Bitar.jpg
+faces/jeff bezos.jpg
+faces/obama.jpg
+faces/Roger.jpg
+faces/Joseph Lteif.jpg
+intents.json
+data.pickle
