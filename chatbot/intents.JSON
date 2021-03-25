@@ -1,0 +1,73 @@
+{"intents": [
+    {"tag": "greeting",
+     "patterns": ["Hi there", "How are you", "Is anyone there?", "Hello", "Good day"],
+     "responses": ["Hello, thanks for asking", "Good to see you again", "Hi there, how can I help?"],
+     "context": ["greetings"]
+    },
+    {"tag": "goodbye",
+     "patterns": ["Bye", "See you later", "Goodbye", "Nice chatting to you, bye", "Till next time"],
+     "responses": ["See you!", "Have a nice day", "Bye! Come back again soon."],
+     "context": ["goodbye"]
+    },
+    {"tag": "thanks",
+     "patterns": ["Thanks", "Thank you", "That's helpful", "Awesome, thanks", "Thanks for helping me"],
+     "responses": ["Happy to help!", "Any time!", "My pleasure"],
+     "context": ["thanks"]
+    },
+    {"tag": "noanswer",
+     "patterns": [],
+     "responses": ["Sorry, can't understand you", "Please give me more info", "Not sure I understand"],
+     "context": ["noanswer"]
+    },
+    {"tag": "options",
+     "patterns": ["How you could help me?", "What you can do?", "What help you provide?", "How you can be helpful?", "What support is offered"],
+     "responses": ["I can recognize faces, recognize writing from image"],
+     "context": ["options"]
+    },
+    {"tag": "face_detection",
+     "patterns": ["Activate face detection","face detection","open face detection", "face detection please", "recognize my face","tell me who I am"],
+     "responses": ["Activating face detection"],
+     "context": ["face detection"]
+    },
+    {"tag": "OCR",
+     "patterns": ["Activate ocr","ocr","open ocr", "ocr please", "tell me what I wrote", "scan this paper","Activate optical character recognition","optical character recognition","open optical character recognition", "optical character recognition please"],
+     "responses": ["Activation ocr","Activating optical character recognition"],
+     "context": ["optical character recognition"]
+    },
+    {"tag": "play",
+        "patterns": ["play a song","play something for me","play", "please play a song", "I want a song"],
+        "responses": ["Sure, what song do you want?","Alright, tell me the name of the song"],
+        "context": ["play"]
+    },
+    {"tag": "time",
+        "patterns": ["tell me the time","what is the time now", "could you please tell me the time", "time please", "time"],
+        "responses": ["Sure, the time is","The time now is"],
+        "context": ["time"]
+    },
+    {"tag": "search",
+        "patterns": ["Can you please search for something","search","search for", "search something for me", "I want to know more about", "tell me about","tell me more about"],
+        "responses": ["Sure, but tell me what do you wanna search for","Alright, but what's the subject"],
+        "context": ["search"]
+    },
+    {"tag": "date",
+        "patterns": ["what's the date today","tell me the date","date please", "date", "what day is it today"],
+        "responses": ["Today, it's ","Oh you forgot again, it's"],
+        "context": ["date"]
+    },
+    {"tag": "joke",
+        "patterns": ["I'm bored tell me something funny","tell me a joke","joke", "I want to hear something funny", "tell me something good", "I want to laugh","tell me a joke please","can you make me laugh","change my mood please"],
+        "responses": ["Sure thing","Oh okay","Mm let me think"],
+        "context": ["joke"]
+    },
+    {"tag": "weather",
+        "patterns": ["I want to know the weather","weather","tell me the weather", "weather please", "what's the weather today"],
+        "responses": ["As you wish but first, tell me the region","Sure thing but, which region"],
+        "context": ["weather"]
+    },
+    {"tag": "statistics",
+        "patterns": ["Give me some info about my device","what's the battery life","statistics", "please I want some statistics about this device", "please statistics"],
+        "responses": ["This is a brief info about yout device.","Sure, there you go"],
+        "context": ["statistics"]
+    }
+]
+}

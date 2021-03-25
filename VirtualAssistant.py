@@ -1,4 +1,5 @@
 # imports
+from chatbot.chatbot import chat
 import speech_recognition as sr
 import pyttsx3
 import pywhatkit
@@ -9,6 +10,7 @@ import sys
 import os
 from weather import weather
 import psutil
+
 
 listener = sr.Recognizer()
 engine = pyttsx3.init()
@@ -34,10 +36,9 @@ def take_command():
             command = command.lower()
             if 'misty' in command:
                 command = command.replace('misty', '')
-                print(command)
-
     except:
         pass
+    print(command)
     return command
 
 
@@ -49,65 +50,80 @@ def Boot_Assistant():
             command = listener.recognize_google(voice, language="en-US")
             command = command.lower()
             print(command)
-            if 'hello misty' in command:
-                talk("Hello {}".format(os.getlogin()))
-                run_alexa()
+            if 'misty' in command or 'mystic' in command:
+                talk("Yes {}".format(os.getlogin()))
+                run_misty()
 
     except:
         pass
 
-
-def run_alexa():
+def run_misty():
 
     command = take_command()
-    print(command)
+    command = chat(command)
+    context = command[1]
 
-    if 'play' in command:
-        song = command.replace('play', '')
-        talk('playing' + song)
-        pywhatkit.playonyt(song)
+    if 'greeting' in context:
+        talk(command[0])
+    
+    elif 'options' in context:
+        talk(command[0])
+        
+    elif 'play' in context:
+        talk(command[0])
+        input = take_command()
+        talk('playing' + input)
+        pywhatkit.playonyt(input)
 
-    elif 'time' in command:
+    elif 'time' in context:
         time = datetime.datetime.now().strftime('%I:%M %p')
         print(time)
-        talk('The current time is ' + time)
+        response = str(command[0] + time)
+        talk(response)
 
-    elif 'search for' in command:
-        search_thing = command.replace('search for', '')
+    elif 'search' in context:
+        talk(command[0])
+        input = take_command()
+        search_thing = input.replace('search for', '')
         result_info = wikipedia.summary(search_thing, 2)
         talk('This is a quick summary about ' + search_thing)
         print(result_info)
         talk(result_info)
 
-    elif 'date' in command:
+    elif 'date' in context:
         date = datetime.date.today()
-        print(str(date))
-        talk("today it's " + str(date))
+        response = str(command[0] + date)
+        print(response)
+        talk(response)
 
-    elif 'joke' in command:
+    elif 'joke' in context:
+        talk(command[0])
         joke = pyjokes.get_joke()
         print(joke)
         talk(joke)
 
-    elif 'thank you' in command:
-        talk("you're welcome " + os.getlogin())
+    elif 'thanks' in context or 'goodbye' in context:
+        response = str(command[0] + os.getlogin())
+        talk(response)
         sys.exit()
 
-    elif 'ocr' in command:
-        talk("Sure thing!")
+    elif 'optical character recognition' in context:
+        talk(command[0])
         import OCR
 
-    elif 'face detection' in command:
-        talk("Sure thing!")
+    elif 'face detection' in context:
+        talk(command[0])
         import FaceDetection
 
-    elif 'weather of' in command:
-        location = command.replace('weather of', '')
+    elif 'weather' in context:
+        talk(command[0])
+        input = take_command()
+        location = input.replace('weather of', '')
         info_dict = weather(location)
         talk("it's " + info_dict["weather description"] +
              "today with a temperature of " + str(info_dict["temperature"]))
 
-    elif 'statistics' in command:
+    elif 'statistics' in context:
         battery = psutil.sensors_battery()
         print("Current Battery percentage is {}%".format(battery.percent))
         print("the cpu is at {}%".format(psutil.cpu_percent()))
@@ -121,7 +137,7 @@ def run_alexa():
     else:
         talk("Could you please repeat ? I didn't understand")
 
-    run_alexa()
+    run_misty()
 
 
 while True:
