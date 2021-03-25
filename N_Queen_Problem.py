@@ -81,7 +81,7 @@ def Place_Queens(Board, Queen, index_x, index_y):
     img2 = Queen
 
     # suppose img2 is to be shifted by `shift` amount 
-    shift = (8+(index_x*27), 3+(index_y*27))
+    shift = (8+(index_x*27)+(index_x%2)*1, 3+(index_y*27)+(index_y%2)*1)
 
     # compute the size of the panorama
     x = map(operator.add, img2.size, shift)
@@ -113,10 +113,9 @@ def Place_Queens(Board, Queen, index_x, index_y):
 # solutions, this function prints one of the 
 # feasible solutions. 
 def solveNQ(): 
-    sub_Board
-    board = [ [0, 0, 0, 0, 0, 0, 0, 0], 
+    board = [ [0, 0, 0, 0, 0, 0, 0, 0],
               [0, 0, 0, 0, 0, 0, 0, 0],
-              [0, 0, 0, 0, 0, 0, 0, 0], 
+              [0, 0, 0, 0, 0, 0, 0, 0],
               [0, 0, 0, 0, 0, 0, 0, 0],
               [0, 0, 0, 0, 0, 0, 0, 0],
               [0, 0, 0, 0, 0, 0, 0, 0],
@@ -132,12 +131,7 @@ def solveNQ():
     Queenimg = Image.open("./Assets/Queen.png")
     for i in coord:
         ChessBoardimg = Place_Queens(ChessBoardimg, Queenimg, coord[i], i)
-        ChessBoardimg.show()
-        print("Enter")
-        cv2.waitKey(100)
-        print("close")
-        try:
-            ChessBoardimg.close()
+    ChessBoardimg.show()
     cv2.waitKey(0)
     return True
   

@@ -62,6 +62,7 @@ def run_misty():
     command = take_command()
     command = chat(command)
     context = command[1]
+    print("command: ",command)
 
     if 'greeting' in context:
         talk(command[0])
@@ -91,8 +92,10 @@ def run_misty():
         talk(result_info)
 
     elif 'date' in context:
+        print("Entered")
         date = datetime.date.today()
-        response = str(command[0] + date)
+        response = command[0] + str(date)
+        print("Done")
         print(response)
         talk(response)
 
