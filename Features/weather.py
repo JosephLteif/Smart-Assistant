@@ -2,10 +2,10 @@ import requests
 from datetime import date
 
 
-def weather(location):
-
+def weather(location="Beirut"):
+    
     # my api key from the openweathermap website
-    user_api = open("API_KEY.txt", "r").read()
+    user_api = open("Data\\Weather\\API_KEY.txt", "r").read()
 
     # accessing the json file with this link of a specific location
     complete_api_link = "https://api.openweathermap.org/data/2.5/weather?q=" + \

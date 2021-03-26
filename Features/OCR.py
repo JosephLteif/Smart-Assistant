@@ -6,7 +6,7 @@ import numpy as np
 import os
 import imutils
 from autocorrect import Speller
-from border_crop import border_crop
+from Features.border_crop import border_crop
 from PIL import Image
 
 
@@ -20,7 +20,7 @@ def VideoOn():
         key = cv2.waitKey(1)
         if key == ord('q'):
             check, frame = video.read()
-            a = cv2.imwrite("CaptureImage.jpg", frame)
+            a = cv2.imwrite("Data\\OCR_Data\\CaptureImage.jpg", frame)
             break
 
     video.release()
@@ -35,13 +35,13 @@ def TesseractSetup():
 
 def CropBorder():
     # return cropped image from which text needs to be extracted
-    im = Image.open("CaptureImage.jpg")
+    im = Image.open("Data\\OCR_Data\\CaptureImage.jpg")
     # im = Image.open("./Assets/quote-luck-is-when-skill-meets-opportunity-vinnie-paz-80-71-88.jpg")
     if im.mode != 'RGB':
         im = im.convert('RGB')
-    im.save("CaptureImage.jpg", dpi=(300, 300))
+    im.save("Data\\OCR_Data\\CaptureImage.jpg", dpi=(300, 300))
     # return border_crop("CaptureImage.jpg")
-    return cv2.imread("CaptureImage.jpg")
+    return cv2.imread("Data\\OCR_Data\\CaptureImage.jpg")
 
 
 def ExtractImageData(img):
@@ -111,7 +111,7 @@ def PreprocessingImage(img, rotation):
 
 def CreateFileToPrintTo():
     # A text file is created and flushed
-    file = open("recognized.txt", "w+")
+    file = open("Data\\OCR_Data\\recognized.txt", "w+")
     file.write("")
     file.close()
 
@@ -122,7 +122,7 @@ def FindContour(im2, contours, language):
     # to pytesseract for extracting text from it
     # Extracted text is then written into the text file
     result = ""
-    file = open("recognized.txt", "a", encoding='utf-8')
+    file = open("Data\\OCR_Data\\recognized.txt", "a", encoding='utf-8')
 
     for cnt in contours:
         x, y, w, h = cv2.boundingRect(cnt)
@@ -155,13 +155,13 @@ def AppendResultToFile(result, file):
     # Close the file
     file.close
 
-
-VideoOn()
-TesseractSetup()
-img = CropBorder()
-language, rotation = ExtractImageData(img)
-im2, contours = PreprocessingImage(img, rotation)
-CreateFileToPrintTo()
-result, file = FindContour(im2, contours, language)
-AppendResultToFile(result, file)
-os.remove('CaptureImage.jpg')
+def launch():
+    VideoOn()
+    TesseractSetup()
+    img = CropBorder()
+    language, rotation = ExtractImageData(img)
+    im2, contours = PreprocessingImage(img, rotation)
+    CreateFileToPrintTo()
+    result, file = FindContour(im2, contours, language)
+    AppendResultToFile(result, file)
+    os.remove('Data\\OCR_Data\\CaptureImage.jpg')

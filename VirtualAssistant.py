@@ -1,5 +1,5 @@
 # imports
-from chatbot.chatbot import chat
+from Features.chatbot import chat
 import speech_recognition as sr
 import pyttsx3
 import pywhatkit
@@ -8,7 +8,10 @@ import wikipedia
 import pyjokes
 import sys
 import os
-from weather import weather
+from Features.weather import weather
+from Features.OCR import launch
+from Features.FaceDetection import classify_face
+from Features.N_Queen_Problem import solveNQ
 import psutil
 
 
@@ -112,11 +115,11 @@ def run_misty():
 
     elif 'optical character recognition' in context:
         talk(command[0])
-        import OCR
+        launch()
 
     elif 'face detection' in context:
         talk(command[0])
-        import FaceDetection
+        classify_face()
 
     elif 'weather' in context:
         talk(command[0])
@@ -137,6 +140,9 @@ def run_misty():
         talk("the cpu is at {}%".format(psutil.cpu_percent()))
         talk('RAM memory is at {} %'.format(psutil.virtual_memory()[2]))
 
+    elif 'queen puzzle' in context:
+        solveNQ()
+    
     else:
         talk("Could you please repeat ? I didn't understand")
 
@@ -144,4 +150,5 @@ def run_misty():
 
 
 while True:
-    Boot_Assistant()
+    # Boot_Assistant()
+    run_misty()

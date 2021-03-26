@@ -134,7 +134,3 @@ def solveNQ():
     ChessBoardimg.show()
     cv2.waitKey(0)
     return True
-  
-# Driver Code 
-solveNQ() 
-  

@@ -68,6 +68,11 @@
         "patterns": ["Give me some info about my device","what's the battery life","statistics", "please I want some statistics about this device", "please statistics"],
         "responses": ["This is a brief info about yout device.","Sure, there you go"],
         "context": ["statistics"]
+    },
+    {"tag": "N_queen_puzzle",
+        "patterns": ["Give me a solution to the queen problem", "Give me a solution to the queen puzzle", "Give me a solution to the n queen problem", "Give me a solution to the n queen puzzle", "Solve the queen problem", "Solve the queen puzzle", "Solve the n queen problem", "Solve the n queen puzzle", "queen puzzle", "queen problem", "n queen puzzle", "n queen problem"],
+        "responses": ["This is a solution to the n queen problem.","Sure, there you go"],
+        "context": ["queen puzzle"]
     }
 ]
 }

@@ -117,6 +117,3 @@ def chat(command):
     bot_response = [response,context]
     
     return bot_response
-
-
-
