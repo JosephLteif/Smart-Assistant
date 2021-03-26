@@ -60,7 +60,7 @@
         "context": ["joke"]
     },
     {"tag": "weather",
-        "patterns": ["I want to know the weather","weather","tell me the weather", "weather please", "what's the weather today"],
+        "patterns": ["I want to know the weather","weather","tell me the weather", "weather please", "what's the weather today", "how is the weather"],
         "responses": ["As you wish but first, tell me the region","Sure thing but, which region"],
         "context": ["weather"]
     },

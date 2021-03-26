@@ -10,11 +10,11 @@ import random
 import json
 import pickle
 
-with open("chatbot\\intents.json") as file:
+with open("Data\\ChatBot_Data\\Data\\intents.JSON") as file:
     data = json.load(file)
 
 try:
-    with open("chatbot\\data.pickle", "rb") as f:
+    with open("Data\\ChatBot_Data\\Model\\data.pickle", "rb") as f:
         words, labels, training, output = pickle.load(f)
 except:
     words = []
@@ -63,7 +63,7 @@ except:
     training = numpy.array(training)
     output = numpy.array(output)
     
-    with open("chatbot\\data.pickle", "wb") as f:
+    with open("Data\\ChatBot_Data\\Model\\data.pickle", "wb") as f:
         pickle.dump((words, labels, training, output), f)
 
 ops.reset_default_graph()
@@ -81,11 +81,13 @@ net = tflearn.regression(net)
 model = tflearn.DNN(net)
 
 try:
-    model.load("chatbot\\model.tflearn")
+    model.load("Data\\ChatBot_Data\\Model\\model.tflearn")
 except:
     # epoch is the number of times the model will see the data
     model.fit(training,output,n_epoch=1000, batch_size=8, show_metric=True)
-    model.save("chatbot\\model.tflearn")
+    model.save("Data\\ChatBot_Data\\Model\\model.tflearn")
+# model.fit(training,output,n_epoch=1000, batch_size=8, show_metric=True)
+# model.save("Data\\ChatBot_Data\\Model\\model.tflearn")
 
 def bag_of_words(s, words):
     

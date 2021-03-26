@@ -19,21 +19,21 @@ def get_encoded_faces():
     """
     encoded = {}
     Edit = False
-    if not path.exists("face_Data.json"):
-        open('face_Data.json', "w").close()
-    with open('face_Data.json') as f:
+    if not path.exists("./Data/faces/Data/face_Data.json"):
+        open('./Data/faces/Data/face_Data.json', "w").close()
+    with open('./Data/faces/Data/face_Data.json') as f:
         try:
             encoded = json.load(f)
         except:
             encoded = {}
     Keys = encoded.keys()
 
-    for dirpath, dnames, fnames in os.walk("faces"):
+    for dirpath, dnames, fnames in os.walk("./Data/faces/Assets"):
         for f in fnames:
             if f.split(".")[0] not in Keys:
                 Edit = True
                 if f.endswith(".jpg") or f.endswith(".png"):
-                    face = face_recognition.load_image_file("faces\\" + f)
+                    face = face_recognition.load_image_file("./Data/faces/Assets/" + f)
                     encoding = face_recognition.face_encodings(face)[0]
                     encoded[f.split(".")[0]] = encoding.tolist()
     if Edit:
@@ -41,7 +41,7 @@ def get_encoded_faces():
         json_Data = json.dumps(encoded)
 
         # Writing to face_Data.json
-        with open("face_Data.json", "w") as outfile:
+        with open("./Data/faces/Data/face_Data.json", "w") as outfile:
             outfile.write(json_Data)
     return encoded
 

@@ -127,8 +127,8 @@ def solveNQ():
         return False
 
     coord = printSolution(board)
-    ChessBoardimg = Image.open("./Assets/ChessBoard.png")
-    Queenimg = Image.open("./Assets/Queen.png")
+    ChessBoardimg = Image.open("Data\\N_Queen_Puzzle_Data\\Assets\\ChessBoard.png")
+    Queenimg = Image.open("Data\\N_Queen_Puzzle_Data\\Assets\\Queen.png")
     for i in coord:
         ChessBoardimg = Place_Queens(ChessBoardimg, Queenimg, coord[i], i)
     ChessBoardimg.show()
