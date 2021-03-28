@@ -83,11 +83,9 @@ model = tflearn.DNN(net)
 try:
     model.load("Data\\ChatBot_Data\\Model\\model.tflearn")
 except:
-    # epoch is the number of times the model will see the data
+#     # epoch is the number of times the model will see the data
     model.fit(training,output,n_epoch=1000, batch_size=8, show_metric=True)
     model.save("Data\\ChatBot_Data\\Model\\model.tflearn")
-# model.fit(training,output,n_epoch=1000, batch_size=8, show_metric=True)
-# model.save("Data\\ChatBot_Data\\Model\\model.tflearn")
 
 def bag_of_words(s, words):
     
