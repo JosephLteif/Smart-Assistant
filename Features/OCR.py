@@ -6,7 +6,7 @@ import numpy as np
 import os
 import imutils
 from autocorrect import Speller
-from Features.border_crop import border_crop
+from border_crop import border_crop
 from PIL import Image
 
 
