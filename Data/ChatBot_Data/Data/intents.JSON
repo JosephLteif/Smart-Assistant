@@ -1,16 +1,16 @@
 {"intents": [
     {"tag": "greeting",
-     "patterns": ["Hi there", "Is anyone there?", "Hello", "Good day"],
+     "patterns": ["Hi there", "Is anyone there?", "Good day","hello", "heyy", "hey", "hi", "hola", "sup", "yooo", "how's it going", "aye mate", "goodmorning", "good evening", "good morning", "nice to meet you", "good day", "how you doing", "what’s happening?", "morning!", "greetings", "heyo", "yooo wassup", "how are you doing", "what's up"],
      "responses": ["Hello", "Good to see you again", "Hi there, how can I help?"],
      "context": ["greetings"]
     },
     {"tag": "goodbye",
-     "patterns": ["Bye", "See you later", "Goodbye", "Nice chatting to you, bye", "Till next time"],
+     "patterns": ["Nice chatting to you, bye", "Till next time","take care", "goodbye", "cya", "bye", "have a good day", "catch you later", "catch ya later", "see ya", "it was nice seeing you", "see you next time", "see you later", "ciao", "talk to you soon", "take it easy", "have a nice day"],
      "responses": ["See you!", "Have a nice day", "Bye! Come back again soon."],
      "context": ["goodbye"]
     },
     {"tag": "thanks",
-     "patterns": ["Thanks", "Thank you", "That's helpful", "Awesome, thanks", "Thanks for helping me"],
+     "patterns": ["That's helpful", "Awesome thanks", "Thanks for helping me","thank you", "thanks", "thxx", "deal thank you", "thank you!", "thx", "thanks amigos", "gotcha", "thank you so much", "thanks for your time", "thanks a ton", "i'm humbled and grateful", "many thanks", "you are the best", "you’re a life saver", "appreciated", "thanks a lot", "mercii", "merci", "appreciate it", "thanks mate", "i’m grateful"],
      "responses": ["Happy to help!", "Any time!", "My pleasure"],
      "context": ["thanks"]
     },
@@ -35,37 +35,37 @@
      "context": ["optical character recognition"]
     },
     {"tag": "play",
-        "patterns": ["play a song","play something for me","play", "please play a song", "I want a song"],
+        "patterns": ["play me a song", "play", "play music", "play something for me", "i’m dying for some music", "please can you play a song", "play previous song", "choose something and play it for me", "play song", "play a song for me", "jam with me", "play some music", "sing for me", "song", "could you play a song", "i'm sad", "i’d love a song right now", "i want this song please", "play random song", "let’s hear a song", "music", "play music for me", "play me a song please", "do you have any rock music"],
         "responses": ["Sure, what song do you want?","Alright, tell me the name of the song"],
         "context": ["play"]
     },
     {"tag": "time",
-        "patterns": ["tell me the time","what is the time now", "could you please tell me the time", "time please", "time"],
+        "patterns": ["what's the time", "what time is it", "what’s the time again", "tell me the time please", "tell me the hour", "show me the time", "tell me the time", "time", "how late am I", "can you tell me the time please", "how far into the day are we", "what hour is it", "give time", "what’s the time", "time please"],
         "responses": ["Sure, the time is","The time now is"],
         "context": ["time"]
     },
     {"tag": "search",
-        "patterns": ["Can you please search for something","search","search for", "search something for me", "I want to know more about", "tell me about","tell me more about"],
+        "patterns": ["Can you please search for something","search","search for", "search something for me", "I want to know more about", "tell me about","tell me more about","find this","google","look up","research","find","do me a favor and tell me"],
         "responses": ["Sure, but tell me what do you wanna search for","Alright, but what's the subject"],
         "context": ["search"]
     },
     {"tag": "date",
-        "patterns": ["what's the date today","tell me the date","date please", "date", "what day is it today"],
+        "patterns": ["what's the date today","tell me the date","date please", "date", "what day is it today","what day of the week are we", "what day is it today", "what is the date today", "what date is it","what day should i scratch of on the calender today", "is it monday today", "what’s tomorrow’s date", "can you tell me the date", "show me the date"],
         "responses": ["Today, it's ","Oh you forgot again, it's"],
         "context": ["date"]
     },
     {"tag": "joke",
-        "patterns": ["I'm bored tell me something funny","tell me a joke","joke", "I want to hear something funny", "tell me something good", "I want to laugh","tell me a joke please","can you make me laugh","change my mood please"],
+        "patterns": ["I'm bored tell me something funny","tell me a joke","joke", "I want to hear something funny", "tell me something good", "I want to laugh","tell me a joke please","can you make me laugh","change my mood please","make me laugh", "gimme memes", "tell a joke", "i need to laugh a bit", "tell me something funny",  "be funny", "entertain me", "hit me with a funny one", "let’s hear a funny jokes", "i bet you can’t make me laugh", "show me your comedy skills", "chandler mode on", "say something to make me laugh"],
         "responses": ["Sure thing","Oh okay","Mm let me think"],
         "context": ["joke"]
     },
     {"tag": "weather",
-        "patterns": ["I want to know the weather","weather","tell me the weather", "weather please", "what's the weather today", "how is the weather"],
+        "patterns": ["daily weather", "how's the weather today", "how is the weather today", "how’s the weather looking today", "how is the weather today", "weather today", "what’s the weather today", "how’s today feeling", "weather man where are you", "how's the weather", "is it gonna rain today", "what’s the forecast for this afternoon?", "should i wear a coat today", "how’s the weather for this week", "how the temperature today", "is there any chance of rain", "is there a possibility of raining today", "is it raining today", "weather", "what time does it start raining", "what’s the forecast like today"],
         "responses": ["As you wish but first, tell me the region","Sure thing but, which region"],
         "context": ["weather"]
     },
     {"tag": "statistics",
-        "patterns": ["Give me some info about my device","what's the battery life","statistics", "please I want some statistics about this device", "please statistics"],
+        "patterns": ["Give me some info about my device","statistics", "please I want some statistics about this device", "please statistics","how's my pc doing", "pc diagnostic", "what are my pc specs", "battery life", "how’s the battery doing", "inform me about my pc", "how much battery is left", "give me the status of my pc", "battery", "how’s my cpu performance", "what’s the info", "how's the pc", "running services", "is my pc ok", "cpu percentage", "am i using too much ram?", "tell me about the cpu percentage", "cpu", "storage", "check my storage", "volume", "memory percentage", "can the storage spare some gb of memory?", "how's the battery life so far?", "memory", "cpu health", "is the graphics card over heating", "updates", "brightness", "what is the estimated time before i have to use the charger again", "how much storage left in my hard disk", "why is my pc slow"],
         "responses": ["This is a brief info about yout device.","Sure, there you go"],
         "context": ["statistics"]
     },
