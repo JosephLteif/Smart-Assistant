@@ -1,7 +1,6 @@
 API_KEY.txt
 __pycache__/FaceDetection.cpython-38.pyc
 __pycache__/weather.cpython-38.pyc
-chatbot/__pycache__/chatbot.cpython-38.pyc
 __pycache__/chatbot.cpython-38.pyc
 pywhatkit_dbs.txt
 Data/OCR_Data/recognized.txt
@@ -11,8 +10,5 @@ Features/__pycache__/FaceDetection.cpython-38.pyc
 Features/__pycache__/OCR.cpython-38.pyc
 Features/__pycache__/weather.cpython-38.pyc
 Features/__pycache__/N_Queen_Problem.cpython-38.pyc
-Data/ChatBot_Data/Model/.vscode/settings.json
-Data/ChatBot_Data/Model/.vscode/settings.json
-chatbot/__pycache__/chatbot.cpython-38.pyc
-Data/ChatBot_Data/Model/.vscode/settings.json
+Data/ChatBot_Data/Model/.vscode
 chatbot/__pycache__/chatbot.cpython-38.pyc

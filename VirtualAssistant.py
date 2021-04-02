@@ -40,7 +40,7 @@ def take_command():
             if 'misty' in command:
                 command = command.replace('misty', '')
     except:
-        pass
+        command = "NONE"
     print(command)
     return command
 
@@ -109,7 +109,7 @@ def run_misty():
         talk(joke)
 
     elif 'thanks' in context or 'goodbye' in context:
-        response = str(command[0] + os.getlogin())
+        response = command[0] + str(os.getlogin())
         talk(response)
         sys.exit()
 
