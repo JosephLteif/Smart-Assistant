@@ -1,12 +1,12 @@
 # Import required packages
-import cv2
-import pytesseract
-import time
-import numpy as np
 import os
+import time
+
+import cv2
 import imutils
+import numpy as np
+import pytesseract
 from autocorrect import Speller
-from Features.border_crop import border_crop
 from PIL import Image
 
 

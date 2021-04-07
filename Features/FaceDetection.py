@@ -1,14 +1,16 @@
+import asyncio
+import json
 import os
 import os.path
 from os import path
+
 import cv2
 import face_recognition
 import numpy as np
-import json
-import threading
 
 face_cascade = cv2.CascadeClassifier(
-        cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+    cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+
 
 def get_encoded_faces():
     """
@@ -33,11 +35,12 @@ def get_encoded_faces():
             if f.split(".")[0] not in Keys:
                 Edit = True
                 if f.endswith(".jpg") or f.endswith(".png"):
-                    face = face_recognition.load_image_file("Data\\faces\\Assets\\" + f)
+                    face = face_recognition.load_image_file(
+                        "Data\\faces\\Assets\\" + f)
                     encoding = face_recognition.face_encodings(face)[0]
                     encoded[f.split(".")[0]] = encoding.tolist()
     if Edit:
-        # Serializing json 
+        # Serializing json
         json_Data = json.dumps(encoded)
 
         # Writing to face_Data.json
@@ -52,14 +55,18 @@ def unknown_image_encoded(img, face_location):
     """
     return face_recognition.face_encodings(img, face_location)
 
+
 def locate_Face(img):
     return face_recognition.face_locations(img)
+
 
 def setup_Video():
     return cv2.VideoCapture(0)
 
+
 def Get_Frame(video):
     return video.read()
+
 
 def classify_face():
     """
@@ -70,46 +77,47 @@ def classify_face():
     :return: list of face names
     """
     video = setup_Video()
-    
+
     faces = get_encoded_faces()
     faces_encoded = list(faces.values())
     known_face_names = list(faces.keys())
     unknown_face_encodings = []
-    
+
     check, frame = Get_Frame(video)
     frame = np.fliplr(frame).copy()
-    
+
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    
+
     face_locations = face_recognition.face_locations(frame)
 
     unknown_face_encodings = unknown_image_encoded(
-            frame, face_locations)
+        frame, face_locations)
     while True:
-        
+
         found = False
-        
+
         check0, frame0 = Get_Frame(video)
         check, frame = Get_Frame(video)
         frame = np.fliplr(frame).copy()
-        
+
         gray0 = cv2.cvtColor(frame0, cv2.COLOR_BGR2GRAY)
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-        
+
         face_locations0 = face_cascade.detectMultiScale(gray0, 1.3, 5)
         face_locations1 = face_cascade.detectMultiScale(gray, 1.3, 5)
 
         if len(face_locations0) < len(face_locations1):
             found = True
-            img = cv2.resize(frame, (0,0), fx=1,fy=1)
+            img = cv2.resize(frame, (0, 0), fx=1, fy=1)
             face_locations1 = face_recognition.face_locations(img)
             unknown_face_encodings = unknown_image_encoded(frame, face_locations1)
-        
+
         face_names = []
         name = ""
         for face_encoding in unknown_face_encodings:
             # See if the face is a match for the known face(s)
-            matches = face_recognition.compare_faces(faces_encoded, face_encoding)
+            matches = face_recognition.compare_faces(
+                faces_encoded, face_encoding)
             name = "Unknown"
 
             # use the known face with the smallest distance to the new face
@@ -121,18 +129,22 @@ def classify_face():
 
             face_names.append(name)
 
-        if not found:    
+        if not found:
             for (x, y, w, h), name in zip(face_locations1, face_names):
-                    cv2.rectangle(frame, (x, y), (x+w, y+h), (255, 0, 0), 2) 
-                
-                    # Draw a label with a name below the face
-                    cv2.rectangle(frame, (x, y+h),(x+w, y+h+20), (255, 0, 0), cv2.FILLED)
-                    font = cv2.FONT_HERSHEY_DUPLEX
-                    cv2.putText(frame, name, (x + 5, y+h + 15),font, 0.5, (255, 255, 255), 2)           
+                cv2.rectangle(frame, (x, y), (x+w, y+h), (255, 0, 0), 2)
 
-            
+                # Draw a label with a name below the face
+                cv2.rectangle(frame, (x, y+h), (x+w, y+h+20),
+                              (255, 0, 0), cv2.FILLED)
+                font = cv2.FONT_HERSHEY_DUPLEX
+                cv2.putText(frame, name, (x + 5, y+h + 15),
+                            font, 0.5, (255, 255, 255), 2)
+
         # Display the resulting image
         cv2.imshow('Video', frame)
         key = cv2.waitKey(1)
         if key == ord('q'):
             return face_names
+
+
+classify_face()

@@ -1,19 +1,20 @@
 # imports
-from Features.chatbot import chat
-import speech_recognition as sr
+import datetime
+import os
+import sys
+
+import psutil
+import pyjokes
 import pyttsx3
 import pywhatkit
-import datetime
+import speech_recognition as sr
 import wikipedia
-import pyjokes
-import sys
-import os
-from Features.weather import weather
-from Features.OCR import launch
+
+from Features.chatbot import chat
 from Features.FaceDetection import classify_face
 from Features.N_Queen_Problem import solveNQ
-import psutil
-
+from Features.OCR import launch
+from Features.weather import weather
 
 listener = sr.Recognizer()
 engine = pyttsx3.init()
