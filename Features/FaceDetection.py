@@ -145,6 +145,3 @@ def classify_face():
         key = cv2.waitKey(1)
         if key == ord('q'):
             return face_names
-
-
-classify_face()

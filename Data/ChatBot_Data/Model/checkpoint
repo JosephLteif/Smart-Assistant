@@ -1,2 +1,2 @@
-model_checkpoint_path: "C:\\Users\\peter\\Documents\\GitHub\\Smart-Assistant\\Data\\ChatBot_Data\\Model\\model.tflearn"
-all_model_checkpoint_paths: "C:\\Users\\peter\\Documents\\GitHub\\Smart-Assistant\\Data\\ChatBot_Data\\Model\\model.tflearn"
+model_checkpoint_path: "C:\\Users\\joelt\\Desktop\\Programming\\Python\\VirtualAssistant\\Data\\ChatBot_Data\\Model\\model.tflearn"
+all_model_checkpoint_paths: "C:\\Users\\joelt\\Desktop\\Programming\\Python\\VirtualAssistant\\Data\\ChatBot_Data\\Model\\model.tflearn"

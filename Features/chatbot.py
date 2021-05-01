@@ -72,8 +72,9 @@ ops.reset_default_graph()
 # defining an input shape for the model
 net = tflearn.input_data(shape=[None, len(training[0])])
 # adding this fully connected layer to the neural network and it will have 8 neurons for the hidden layer
-net = tflearn.fully_connected(net, 8)
-net = tflearn.fully_connected(net, 8)
+net = tflearn.fully_connected(net, int(((len(training[0])+len(output[0]))*2)/3))
+print(int(((len(training[0])+len(output[0]))*2)/3))
+net = tflearn.fully_connected(net, int(((len(training[0])+len(output[0]))*2)/3))
 # this allow us to get probabilities for each output 
 net = tflearn.fully_connected(net, len(output[0]), activation="softmax")
 net = tflearn.regression(net)
@@ -86,6 +87,8 @@ except:
 # epoch is the number of times the model will see the data
     model.fit(training,output,n_epoch=1000, batch_size=8, show_metric=True)
     model.save("Data\\ChatBot_Data\\Model\\model.tflearn")
+# model.fit(training,output,n_epoch=1000, batch_size=8, show_metric=False)
+# model.save("Data\\ChatBot_Data\\Model\\model.tflearn")
 
 def bag_of_words(s, words):
     
