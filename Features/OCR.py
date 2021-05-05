@@ -169,5 +169,3 @@ def launch():
     result, file = FindContour(im2, contours, language)
     AppendResultToFile(result, file)
     os.remove('Data\\OCR_Data\\CaptureImage.jpg')
-    
-launch()
